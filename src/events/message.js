@@ -21,6 +21,9 @@ async function message(message, client) {
     // Check channel
     if (message.channel.type !== "text" && !command.allowDMs) return message.channel.error("This command is not available through direct message.");
 
+    // Check if owner only
+    if (command.ownerOnly && !client.options.owners.includes(message.author.id)) return;
+
     // Check user permissions
     if (command.userPerms.find(permission => !message.member.permissions.has(permission))) return message.channel.error("Insufficient permissions!");
     // Check bot permissions

@@ -3,6 +3,7 @@ const config = require("./config");
 
 // Extenders
 require("./src/extenders/Guild");
+require("./src/extenders/TextChannel");
 
 const client = new Client({ token: config.credentials.token, ...config });
 

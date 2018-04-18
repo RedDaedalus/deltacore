@@ -32,6 +32,12 @@ class Command {
             aliases: {
                 value: props.conf.aliases || []
             },
+            ulisted: {
+                value: props.conf.unlisted === undefined ? false : props.conf.unlisted
+            },
+            ownerOnly: {
+                value: props.conf.ownerOnly === undefined ? false : props.conf.ownerOnly
+            },
             cooldowns: {
                 value: new Set()
             }
