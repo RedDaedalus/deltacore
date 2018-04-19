@@ -4,9 +4,9 @@ class ServerInfo extends Command {
     constructor(client) {
         super(client, {
             help: {
-                "name": "serverinfo",
-                "description": "Shows basic information on the server.",
-                "usage": ""
+                name: "serverinfo",
+                description: "Shows basic information on the server.",
+                usage: ""
             },
             conf: {
                 botPerms: ["EMBED_LINKS"],
@@ -15,7 +15,7 @@ class ServerInfo extends Command {
         });
     }
 
-    async run(message, args) {
+    async run(message) {
         const embed = message.channel.buildEmbed()
             .setColor(this.client.options.color)
             .setAuthor(message.guild.name, message.guild.iconURL({ format: "png", size: 256 }))

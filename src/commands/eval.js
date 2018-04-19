@@ -7,9 +7,9 @@ class Eval extends Command {
     constructor(client) {
         super(client, {
             help: {
-                "name": "eval",
-                "description": "Evaluates javscript code.",
-                "usage": "<code>"
+                name: "eval",
+                description: "Evaluates javscript code.",
+                usage: "<code>"
             },
             conf: {
                 ownerOnly: true
@@ -17,7 +17,7 @@ class Eval extends Command {
         });
     }
 
-    async run(message, args) {
+    async run(message) {
         // Resolve the specified code
         const result = new Promise(r => r(eval(message.content.split(" ").slice(1).join(" "))));
 

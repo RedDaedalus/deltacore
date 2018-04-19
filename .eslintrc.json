@@ -1,0 +1,8 @@
+{
+    "extends": "rallycoding",
+    "rules": {
+        "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+        "max-len": "off",
+        "no-eval": "off"
+    }
+}

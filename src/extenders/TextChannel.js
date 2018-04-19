@@ -25,7 +25,7 @@ Structures.extend("DMChannel", (Structure) => {
         }
 
         respond(content, options = { check: true }) {
-            return this.send(options.check ? "✅ | " : "" + content);
+            return this.send((options.check ? "✅ | " : "") + content);
         }
     }
 

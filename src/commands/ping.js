@@ -4,15 +4,14 @@ class Ping extends Command {
     constructor(client) {
         super(client, {
             help: {
-                "name": "ping",
-                "description": "Responds with the bot's ping.",
-                "usage": ""
+                name: "ping",
+                description: "Responds with the bot's ping."
             },
             conf: { }
         });
     }
 
-    async run(message, args) {
+    async run(message) {
         const ping = await message.channel.send("🏓 | Pinging...");
         ping.edit(`🏓 | Pong! Took ${ping.createdTimestamp - message.createdTimestamp}ms.`);
     }

@@ -1,6 +1,6 @@
 const Command = require("../classes/Command");
 
-class Raw extends Command{
+class Raw extends Command {
     constructor(client) {
         super(client, {
             help: {
