@@ -1,9 +1,14 @@
+const { escapeMarkdown } = require("discord.js");
+
 async function message(message, client) {
     // Verify that the message was sent in a valid guild, the bot has permissions to send messages, and not by a bot
     if (message.author.bot || (message.guild && !message.guild.available) || (message.guild && !message.guild.me.permissions.has("SEND_MESSAGES"))) return;
 
     // Fetch server settings or default settings
     const settings = message.guild ? await message.guild.fetchSettings() : client.options.defaultSettings;
+    
+    // Check if the message content is a bot mention
+    if (new RegExp(`^<@(?:!?${client.user.id})>$`, "ig").test(message.content)) return message.channel.respond(`This server's prefix is \`${escapeMarkdown(settings.prefix)}\`.`);
 
     // Verify that the message starts with the prefix
     if (message.content.indexOf(settings.prefix) !== 0) return;
