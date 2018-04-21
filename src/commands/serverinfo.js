@@ -10,7 +10,8 @@ class ServerInfo extends Command {
             },
             conf: {
                 botPerms: ["EMBED_LINKS"],
-                aliases: ["server"]
+                aliases: ["server"],
+                dms: false
             }
         });
     }
@@ -29,7 +30,7 @@ class ServerInfo extends Command {
             .addField("» Voice Channels", message.guild.channels.filter(c => c.type === "voice").size, true)
             .addField("» Roles", message.guild.roles.size, true)
             .addField("» Region", message.guild.region, true)
-            .setFooter(`DeltaCore by Daedalus#1234`)
+            .setFooter(`DeltaCore by Daedalus#1111`)
             .setTimestamp();
 
         embed.channel.send(embed);

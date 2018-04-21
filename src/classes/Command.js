@@ -24,7 +24,7 @@ class Command {
                 value: props.conf.botPerms || []
             },
             allowDMs: {
-                value: props.conf.dms || true
+                value: props.conf.dms === undefined ? true : props.conf.dms
             },
             cooldown: {
                 value: props.conf.cooldown || 1000

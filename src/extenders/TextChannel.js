@@ -19,15 +19,19 @@ Structures.extend("TextChannel", (Structure) => {
 });
 
 Structures.extend("DMChannel", (Structure) => {
-    class TextChannel extends Structure {
+    class DMChannel extends Structure {
         error(content, options = {}) {
             return this.send(`❌ | ${content}`, options);
         }
 
         respond(content, options = { check: true }) {
-            return this.send((options.check ? "✅ | " : "") + content);
+            return this.send((options.check ? "✅ | " : "") + content, options);
+        }
+
+        buildEmbed() {
+            return Object.defineProperty(new MessageEmbed(), "channel", { value: this });
         }
     }
 
-    return TextChannel;
+    return DMChannel;
 });

@@ -14,7 +14,8 @@ class Clear extends Command {
             conf: {
                 aliases: ["prune", "purge"],
                 userPerms: ["MANAGE_MESSAGES"],
-                botPerms: ["MANAGE_MESSAGES"]
+                botPerms: ["MANAGE_MESSAGES"],
+                dms: false
             }
         });
     }

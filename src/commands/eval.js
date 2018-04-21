@@ -38,7 +38,7 @@ class Eval extends Command {
                 .setColor("GREEN")
                 .setTitle("Success")
                 .setDescription(`\`\`\`js\n${response}\`\`\``)
-                .setFooter("DeltaCore by Daedalus#1234")
+                .setFooter("DeltaCore by Daedalus#1111")
                 .setTimestamp();
 
             embed.channel.send(embed);
@@ -56,7 +56,7 @@ class Eval extends Command {
                 .setColor("RED")
                 .setTitle("Error")
                 .setDescription(`\`\`\`js\n${response}\`\`\``)
-                .setFooter("DeltaCore by Daedalus#1234")
+                .setFooter("DeltaCore by Daedalus#1111")
                 .setTimestamp();
 
             embed.channel.send(embed);

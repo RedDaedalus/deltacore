@@ -11,7 +11,8 @@ class Settings extends Command {
             },
             conf: {
                 aliases: ["set"],
-                userPerms: ["MANAGE_SERVER"]
+                userPerms: ["MANAGE_SERVER"],
+                dms: false
             }
         });
     }

@@ -9,7 +9,8 @@ class Raw extends Command {
                 usage: "[guild]"
             },
             conf: {
-                ownerOnly: true
+                ownerOnly: true,
+                dms: false
             }
         });
     }
