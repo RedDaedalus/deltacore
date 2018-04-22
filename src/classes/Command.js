@@ -43,6 +43,23 @@ class Command {
             }
         }); 
     }
+
+    // CREDITS
+    // Mostly adapted from Misaki's Command.verifyUser function
+    // https://github.com/NotAWeebDev/Misaki/blob/master/structures/Command.js#L55
+    async verifyUser(unresolved, message) {
+        try {
+            const match = /(?:<@!?)?(\d{17,20})>?/ig.exec(unresolved);
+            if (match) return this.client.users.fetch(match[1]);
+            
+            if (message && message.guild && /#\d{4}/g.test(unresolved)) return message.guild.members.find(m => m.user.tag === unresolved);
+            
+            const member = message && message.guild ? message.guild.members.find(m => m.user.username === unresolved || m.displayName === unresolved) : null;
+            return member ? member.user : null;
+        } catch (e) {
+            return null;
+        }
+    }
 }
 
 module.exports = Command;

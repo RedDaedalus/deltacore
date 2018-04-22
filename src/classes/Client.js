@@ -26,6 +26,7 @@ class CustomClient extends Client {
     async init() {
         // Server settings
         Object.defineProperty(this, "guildSettings", { value: r.table("guild_settings") });
+        Object.defineProperty(this, "modLogs", { value: r.table("moderation_logs") });
 
         this.log("finished", "Initialized rethinkdb.", "green");
     }
@@ -37,7 +38,7 @@ class CustomClient extends Client {
     loadCommand(path, name) {
         try {
             // Require the command
-            const props = new (require(path + sep + name))(this);
+            const props = new (require(path + sep + name))(this); //eslint-disable-line global-require
             // If a command has an init function, run it
             if (props.init) props.init();
             // Add the command to the collection
@@ -74,7 +75,7 @@ class CustomClient extends Client {
             if (!file.ext || file.ext !== ".js") return;
 
             // Fetch event
-            const event = require(`../../${path}/${file.name}`);
+            const event = require(`../../${path}/${file.name}`); //eslint-disable-line global-require
             // Add event listener
             super.on(file.name, (...args) => event(...args, this));
         });

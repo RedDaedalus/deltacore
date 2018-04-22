@@ -51,14 +51,14 @@ class Settings extends Command {
             let output;
 
             // If type is channel, get the channel name
-            if (type === "channel") output = (message.guild.channels.get(setting) || { name: null }).name;
+            if (type === "channel") output = message.guild.channels.get(setting) || null;
             else output = setting;
 
             // Validate the output
-            if (output === null) return message.channel.error(`This setting is unset.`);
-
+            if (output === null) return message.channel.error("This setting is unset.");
+            
             // Respond with the output's value
-            return message.channel.respond(`The current value for setting __${escapeMarkdown(args[1])}__ is **${escapeMarkdown(output)}*`, { showCheck: false });
+            return message.channel.respond(`The current value for setting __${escapeMarkdown(args[1])}__ is **${escapeMarkdown(output.toString())}**`, { showCheck: false });
         }
 
         // Create an empty array for the result
@@ -77,7 +77,7 @@ class Settings extends Command {
                 let output;
                 
                 // If type is channel, get the channel name
-                if (type === "channel") output = (message.guild.channels.get(value) || { name: null }).name;
+                if (type === "channel") output = message.guild.channels.get(value) || null;
                 else output = value;
 
                 // If output is valid, push the output to result
@@ -86,7 +86,7 @@ class Settings extends Command {
         }
 
         // Send all of the information stored in result
-        return message.channel.respond(`**__List of server settings:__**\n${result.map(({ setting, value }) => `__${escapeMarkdown(setting)}__ is set to **${escapeMarkdown(value)}**`).join("\n")}`, { showCheck: false });
+        return message.channel.respond(`**__List of server settings:__**\n${result.map(({ setting, value }) => `__${escapeMarkdown(setting)}__ is set to **${escapeMarkdown(value.toString())}**`).join("\n")}`, { showCheck: false });
     }
 
     async edit(message, args, settings) {

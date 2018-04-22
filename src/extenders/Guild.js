@@ -1,4 +1,5 @@
 const { Structures } = require("discord.js");
+const r = require("rethinkdbdash")({ db: "deltacore" });
 
 Structures.extend("Guild", (Structure) => {
     class Guild extends Structure {
@@ -10,6 +11,19 @@ Structures.extend("Guild", (Structure) => {
 
             // Return the found settings
             return settings || { id: this.id, ...this.client.options.defaultSettings };
+        }
+
+        async createModLog(action, target, moderator, reason, embed) {
+            // Fetch the latest case
+            const [latest] = await this.client.modLogs.filter({ guid_id: message.guild.id }).orderBy({ index: r.desc("case_id") }).limit(1);
+            // Get the new case ID
+            const caseID = latest ? latest.case_id + 1 : 1;
+
+            embed.setFooter(`Case ID ${caseID}`);
+            const message = await embed.channel.send(embed);
+
+            // Insert the case into modlogs
+            return this.client.modLogs.insert({ guild_id: this.id, message_id: message.id, case_id: caseID, action, target, moderator, reason, received: new Date() });
         }
     }
 
