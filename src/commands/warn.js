@@ -21,6 +21,10 @@ class Warn extends Command {
         if (!user) return message.channel.error("Please specify a valid user ID, name, tag, or mention.");
         if (!args[0]) return message.channel.error("Please specify a reason for this warn.");
 
+        const member = await message.guild.members.fetch(user.id);
+
+        if (message.guild.owner.id !== message.author.id && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.error("Your permissions are too low to do warn this user.");
+
         const modlog = message.guild.channels.get(settings.modlog);
         if (!modlog) return message.channel.error(`No moderation logs channel set. Type \`${settings.prefix}settings edit modlog #channel\` to set moderation logs up.`);
 

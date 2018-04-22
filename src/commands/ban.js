@@ -21,6 +21,13 @@ class Ban extends Command {
         if (!user) return message.channel.error("Please specify a valid user ID, name, tag, or mention.");
         if (!args[0]) return message.channel.error("Please specify a reason for this ban.");
 
+        const member = await message.guild.members.fetch(user.id);
+
+        if (message.guild.owner.id !== message.author.id) {
+            if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.error("Your permissions are too low to do ban this user.");
+            if (message.guild.me.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.channel.error("My permissions are too low to ban this user.");
+        }
+
         const modlog = message.guild.channels.get(settings.modlog);
         if (!modlog) return message.channel.error(`No moderation logs channel set. Type \`${settings.prefix}settings edit modlog #channel\` to set moderation logs up.`);
 
@@ -32,7 +39,6 @@ class Ban extends Command {
 
         await message.guild.createModLog("ban", user.id, message.author.id, args.join(" "), embed);
         
-        const member = await message.guild.members.fetch(user);
         await member.ban(`(${message.author.tag}) ${args.join(" ")}`);
 
         message.channel.respond(`**${user.tag}** has been banned.`);
