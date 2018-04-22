@@ -15,7 +15,7 @@ Structures.extend("Guild", (Structure) => {
 
         async createModLog(action, target, moderator, reason, embed) {
             // Fetch the latest case
-            const [latest] = await this.client.modLogs.filter({ guid_id: message.guild.id }).orderBy({ index: r.desc("case_id") }).limit(1);
+            const [latest] = await this.client.modLogs.filter({ guild_id: embed.channel.guild.id }).orderBy(r.desc("case_id")).limit(1);
             // Get the new case ID
             const caseID = latest ? latest.case_id + 1 : 1;
 

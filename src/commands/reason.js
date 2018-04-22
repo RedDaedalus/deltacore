@@ -19,7 +19,7 @@ class Reason extends Command {
     async run(message, args, settings) {
         if (!args[1]) return message.channel.error(`Command usage: \`${settings.prefix + this.name} ${this.usage}\`.`);
 
-        const [target] = args[0] === "latest" ? await this.client.modLogs.filter({ guid_id: message.guild.id }).orderBy({ index: r.desc("case_id") }).limit(1) : await this.client.modLogs.filter({ guild_id: message.guild.id, case_id: parseInt(args[0], 10) });
+        const [target] = args[0] === "latest" ? await this.client.modLogs.filter({ guid_id: message.guild.id }).orderBy(r.desc("case_id")).limit(1) : await this.client.modLogs.filter({ guild_id: message.guild.id, case_id: parseInt(args[0], 10) });
         if (!target) return message.channel.error("Case not found.");
 
         const channel = message.guild.channels.get(settings.modlog);
